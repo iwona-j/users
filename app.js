@@ -411,15 +411,11 @@ var users = [
   }
 ];
 
+// the "index" route, which serves the Angular app
 app.get('/', function (req, res) {
-  console.log(req,res)
     res.sendFile(path.join(__dirname,'./dist/index.html'))
 });
 
-// the "index" route, which serves the Angular app
-// app.get('/', function (req, res) {
-//     res.sendFile(path.join(__dirname,'./dist/index.html'))
-// });
 
 // the GET "users" API endpoint
 app.get('/api/users', function (req, res) {
