@@ -14,6 +14,7 @@ export class UserListComponent implements OnInit {
   constructor(private ApiService: ApiService) { }
 
   ngOnInit() {
+    this.getUserList();
   }
 
   getUserList () {

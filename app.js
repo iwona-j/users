@@ -411,10 +411,15 @@ var users = [
   }
 ];
 
-// the "index" route, which serves the Angular app
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname,'/dist/index.html'))
+  console.log(req,res)
+    res.sendFile(path.join(__dirname,'./dist/index.html'))
 });
+
+// the "index" route, which serves the Angular app
+// app.get('/', function (req, res) {
+//     res.sendFile(path.join(__dirname,'./dist/index.html'))
+// });
 
 // the GET "users" API endpoint
 app.get('/api/users', function (req, res) {
@@ -423,7 +428,7 @@ app.get('/api/users', function (req, res) {
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    let err = new Error('Not Found');
+    let err = new Error('Not Found !!!!!!!!!!');
     err.status = 404;
     next(err);
 });
