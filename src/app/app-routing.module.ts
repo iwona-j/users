@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-// import { AppComponent } from './app.component';
 import { Error404Component } from './core/error-404/error-404.component';
 
 const routes: Routes = [

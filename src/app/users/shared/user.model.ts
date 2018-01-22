@@ -1,8 +1,11 @@
+import {Name} from './name.model';
+import {Friend} from './friend.model';
+
 export class User {
   constructor(public _id: string,
   public index:number,
   public guid: string,
-  public isActive: true,
+  public isActive: boolean,
   public balance: string,
   public picture: string,
   public age: number,
@@ -21,16 +24,4 @@ export class User {
   public friends: Array<Friend>,
   public greeting: string,
   public favoriteFruit: string) {}
-}
-
-export class Friend {
-    constructor(
-        public id: number,
-        public name: string){}
-}
-
-export class Name {
-    constructor(
-        public first: string,
-        public last: string){}
 }

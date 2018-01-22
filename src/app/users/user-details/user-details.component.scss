@@ -1,0 +1,44 @@
+.user-data {
+    .user-intro {
+        text-align: center;
+        .user-picture {
+            .activity-icon{
+
+            }
+            img{
+                border-radius: 50%;
+            }
+        }
+        .user-name{
+            font-size: 1.7em;
+            font-weight: bold;
+        }
+    }
+
+    .section{
+        padding: 15px;
+        margin-top: 20px;
+
+        .section-title {
+            font-size: 1.3em;
+            padding: 5px;
+            border-bottom: grey 1px solid;
+        }
+        .section-data {
+        .section-row{
+            margin-top: 10px;
+            .section-row-label {
+                font-weight: 600;
+            }
+            .section-row-value {
+                font-weight: 400;
+            }
+        }
+        }
+
+
+        agm-map {
+            height: 300px;
+        }
+    }
+}

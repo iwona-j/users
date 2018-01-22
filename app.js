@@ -411,15 +411,24 @@ var users = [
   }
 ];
 
-// the "index" route, which serves the Angular app
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname,'./dist/index.html'))
-});
-
-
-// the GET "users" API endpoint
+// the GET users API endpoint
 app.get('/api/users', function (req, res) {
     res.send(users);
+});
+
+// the GET single user API endpoint
+app.get('/api/users/:id', function (req, res) {
+    console.log("GET user: " + req.params.id);
+
+    let id = req.params.id;
+    let user = users.find(x => x.guid === id);
+
+    res.send(user);
+});
+
+// the "index" route, which serves the Angular app
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname,'./dist/index.html'))
 });
 
 // catch 404 and forward to error handler

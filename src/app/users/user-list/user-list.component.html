@@ -1,3 +1,17 @@
-<p>
-  user-list works!
-</p>
+<div>
+  <h3>User List</h3>
+
+  <div class="search">
+    <input id="filterInput" [(ngModel)]="query">
+  </div>
+
+  <div>
+      <li *ngFor="let user of users | searchByName:'name':query"> 
+         <!--| searchByName:query-->
+        <ul> 
+            <span> {{user.name | userName}} </span> 
+            <a [routerLink]="[user.guid]">>></a> 
+        </ul>
+      </li>
+  </div>
+</div>
