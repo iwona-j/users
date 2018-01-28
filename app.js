@@ -6,9 +6,8 @@ const app = express();
 app.use(express.static(__dirname));
 
 app.use(bodyParser.json()); // support json encoded bodies
-// app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+// app.use(bodyParser.urlencoded({extended: true })); // support encoded bodies
 
-// some data for the API
 var users = [
   {
     "_id": "5728799d89f5e06d069ccc7a",
@@ -16,7 +15,7 @@ var users = [
     "guid": "deded478-6c03-4b46-a6e0-f59908ce6fa9",
     "isActive": true,
     "balance": "$3,085.61",
-    "picture": "http://placehold.it/32x32",
+    "picture": "https://i.stack.imgur.com/HQwHI.jpg",
     "age": 28,
     "eyeColor": "green",
     "name": {
@@ -73,7 +72,7 @@ var users = [
     "guid": "4ff7dd5d-06f1-4b41-ad45-90bfe65a7ce9",
     "isActive": false,
     "balance": "$3,927.62",
-    "picture": "http://placehold.it/32x32",
+    "picture": "https://i.stack.imgur.com/HQwHI.jpg",
     "age": 40,
     "eyeColor": "green",
     "name": {
@@ -130,7 +129,7 @@ var users = [
     "guid": "3c6af411-e274-479d-ba7e-096e1125fd68",
     "isActive": false,
     "balance": "$3,438.71",
-    "picture": "http://placehold.it/32x32",
+    "picture": "https://i.stack.imgur.com/HQwHI.jpg",
     "age": 22,
     "eyeColor": "green",
     "name": {
@@ -187,7 +186,7 @@ var users = [
     "guid": "0435691d-7ee0-477e-8144-0b47182129fe",
     "isActive": true,
     "balance": "$2,236.09",
-    "picture": "http://placehold.it/32x32",
+    "picture": "https://i.stack.imgur.com/HQwHI.jpg",
     "age": 20,
     "eyeColor": "brown",
     "name": {
@@ -244,7 +243,7 @@ var users = [
     "guid": "3e6c4939-8de2-4b1e-96c7-5391de8b272b",
     "isActive": true,
     "balance": "$3,303.01",
-    "picture": "http://placehold.it/32x32",
+    "picture": "https://i.stack.imgur.com/HQwHI.jpg",
     "age": 31,
     "eyeColor": "green",
     "name": {
@@ -301,7 +300,7 @@ var users = [
     "guid": "100137e7-1129-486a-9b52-f62a820231d8",
     "isActive": true,
     "balance": "$2,274.62",
-    "picture": "http://placehold.it/32x32",
+    "picture": "https://i.stack.imgur.com/HQwHI.jpg",
     "age": 37,
     "eyeColor": "green",
     "name": {
@@ -358,7 +357,7 @@ var users = [
     "guid": "bae35bbc-b5dd-4b1e-a62e-eed943558845",
     "isActive": true,
     "balance": "$1,202.34",
-    "picture": "http://placehold.it/32x32",
+    "picture": "https://i.stack.imgur.com/HQwHI.jpg",
     "age": 31,
     "eyeColor": "blue",
     "name": {
@@ -418,20 +417,25 @@ app.get('/api/users', function (req, res) {
 
 // the GET single user API endpoint
 app.get('/api/users/:id', function (req, res) {
-    console.log("GET user: " + req.params.id);
-
     let id = req.params.id;
     let user = users.find(x => x.guid === id);
 
     res.send(user);
 });
 
-// the "index" route, which serves the Angular app
+app.get('/assets/*', function (req, res) {
+    res.sendFile(path.join(__dirname,`./dist${req.originalUrl}`))
+});
+
+app.get('/favicon.ico', function (req, res) {
+    res.sendFile(path.join(__dirname,`./dist${req.originalUrl}`))
+});
+
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname,'./dist/index.html'))
 });
 
-// catch 404 and forward to error handler
+// catch 404
 app.use(function(req, res, next) {
     let err = new Error('Not Found !!!!!!!!!!');
     err.status = 404;
@@ -440,6 +444,6 @@ app.use(function(req, res, next) {
 
 // HTTP listener
 app.listen(3000, function () {
-    console.log('Example listening on port 3000!');
+    console.log('Listening on port 3000!');
 });
 module.exports = app;

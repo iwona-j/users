@@ -1,0 +1,25 @@
+.user-list {
+    h3 {
+        text-align: center;
+    }
+    .table-wraper{
+        .search {
+            margin: 15px;
+            font-weight: bold;
+
+            input {
+                margin-left: 15px;
+            }
+        }
+        table {
+            tr {
+                td {
+                    cursor: pointer;
+                }
+                :nth-child(2) {
+                    text-align: right;
+                }
+            }
+        }
+    }
+}

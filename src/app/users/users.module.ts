@@ -7,7 +7,7 @@ import { AgmCoreModule } from '@agm/core';
 import { UserRoutingModule } from './users.routing.module';
 import { UsersComponent } from './users.component';
 import { UserListComponent } from './user-list/user-list.component';
-import { UserDetailsComponent} from './user-details/user-details.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 import { CoreModule } from './../core/core.module';
 
@@ -30,4 +30,4 @@ import { CoreModule } from './../core/core.module';
   ],
   
 })
-export class UsersModule { }
+export class UsersModule {}

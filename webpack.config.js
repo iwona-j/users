@@ -10,10 +10,10 @@ const postcssUrl = require('postcss-url');
 const cssnano = require('cssnano');
 const customProperties = require('postcss-custom-properties');
 
-const { NoEmitOnErrorsPlugin, SourceMapDevToolPlugin, NamedModulesPlugin } = require('webpack');
-const { NamedLazyChunksWebpackPlugin, BaseHrefWebpackPlugin } = require('@angular/cli/plugins/webpack');
-const { CommonsChunkPlugin } = require('webpack').optimize;
-const { AngularCompilerPlugin } = require('@ngtools/webpack');
+const {NoEmitOnErrorsPlugin, SourceMapDevToolPlugin, NamedModulesPlugin } = require('webpack');
+const {NamedLazyChunksWebpackPlugin, BaseHrefWebpackPlugin } = require('@angular/cli/plugins/webpack');
+const {CommonsChunkPlugin } = require('webpack').optimize;
+const {AngularCompilerPlugin } = require('@ngtools/webpack');
 
 const nodeModules = path.join(process.cwd(), 'node_modules');
 const realNodeModules = fs.realpathSync(nodeModules);
@@ -30,18 +30,18 @@ const postcssPlugins = function () {
             autoprefixer: false,
             safe: true,
             mergeLonghand: false,
-            discardComments: { remove: (comment) => !importantCommentRe.test(comment) }
+            discardComments: {remove: (comment) => !importantCommentRe.test(comment) }
         };
         return [
             postcssUrl({
-                filter: ({ url }) => url.startsWith('~'),
-                url: ({ url }) => path.join(projectRoot, 'node_modules', url.substr(1)),
+                filter: ({url }) => url.startsWith('~'),
+                url: ({url }) => path.join(projectRoot, 'node_modules', url.substr(1)),
             }),
             postcssUrl([
                 {
                     // Only convert root relative URLs, which CSS-Loader won't process into require().
-                    filter: ({ url }) => url.startsWith('/') && !url.startsWith('//'),
-                    url: ({ url }) => {
+                    filter: ({url }) => url.startsWith('/') && !url.startsWith('//'),
+                    url: ({url }) => {
                         if (deployUrl.match(/:\/\//) || deployUrl.startsWith('/')) {
                             // If deployUrl is absolute or root relative, ignore baseHref & use deployUrl as is.
                             return `${deployUrl.replace(/\/$/, '')}${url}`;
@@ -67,7 +67,7 @@ const postcssPlugins = function () {
                 }
             ]),
             autoprefixer(),
-            customProperties({ preserve: true })
+            customProperties({preserve: true })
         ].concat(minimizeCss ? [cssnano(minimizeOptions)] : []);
     };
 

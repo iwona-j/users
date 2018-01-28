@@ -1,18 +1,18 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'searchByName'
+  name: 'search'
 })
-export class SearchByNamePipe implements PipeTransform {
+export class SearchPipe implements PipeTransform {
 
- public transform(value, keys: string, term: string) {
+ public transform(value: any, keys: string, term: string) {
 
     if (!term) return value;
     return (value || []).filter((item) => keys.split(',').some(key => {
       let itemValue = item[key];
       if (itemValue !== null && typeof itemValue === 'object') {
         return Object.keys(itemValue).reduce((memo, _key) => {
-            return memo || this.check(itemValue, _key, term);
+            return memo || this.containsString(itemValue, _key, term);
         }, false);
       }
       return item.hasOwnProperty(key) && new RegExp(term, 'gi').test(item[key])
@@ -20,7 +20,7 @@ export class SearchByNamePipe implements PipeTransform {
 
   }
 
-  check(item: string, key: string, term: string) {
+  containsString(item: string, key: string, term: string) {
     return item.hasOwnProperty(key) && new RegExp(term, 'gi').test(item[key])
   }
 

@@ -1,10 +1,5 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
-
-// const httpOptions = {
-//     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-// };
 
 @Injectable()
 export class ApiService {
@@ -16,8 +11,8 @@ export class ApiService {
         return this.http.get('/api/users');
     }
 
-    getUser(id: string) {
-        return this.http.get(`/api/users/${id}`);
+    getUser(guid: string) {
+        return this.http.get(`/api/users/${guid}`);
     }
 
 }

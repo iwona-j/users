@@ -1,17 +1,32 @@
 <div>
-  <h3>User List</h3>
+  <div class="user-list row justify-content-md-center">
 
-  <div class="search">
-    <input id="filterInput" [(ngModel)]="query">
-  </div>
+      <div class="col-12">
+        <h3>User List</h3>
+      </div>
 
-  <div>
-      <li *ngFor="let user of users | searchByName:'name':query"> 
-         <!--| searchByName:query-->
-        <ul> 
-            <span> {{user.name | userName}} </span> 
-            <a [routerLink]="[user.guid]">>></a> 
-        </ul>
-      </li>
+      <app-preloader *ngIf="loading" class="col-12"></app-preloader>
+
+      <div *ngIf="!loading" class="col-12">
+
+          <div *ngIf="!users.length">No users found</div>
+
+          <div *ngIf="users.length" class="table-wraper">
+
+            <div class="search"> 
+              Search user:  <input id="filterInput" [(ngModel)]="query">
+            </div>
+
+            <table class="table"> 
+              <tbody>
+                <tr *ngFor="let user of users | search:'name':query" (click)="goToUserDetails(user.guid)">
+                  <td>{{user.name | userName}}</td>
+                  <td>></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+
   </div>
 </div>

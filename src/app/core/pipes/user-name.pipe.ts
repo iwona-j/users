@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Name} from '../../users/shared/name.model';
+import { Name } from '../../users/shared/name.model';
 
 @Pipe({
   name: 'userName'

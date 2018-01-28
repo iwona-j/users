@@ -1,85 +1,97 @@
-<div>
-  <a [routerLink]="['../']"> back to list</a>
-</div>
-
 <div class="user-data">
-  <div class="user-intro">
-    <div class="user-picture">
-      <img class="activity-icon" [src]="user.isActive ? 'circle_green.ico' : 'circle_red.ico'">
-      <img src="{{user.picture}}">
+
+  <div class="user-data-header">
+      <a [routerLink]="['../']"> < Back To List</a>
     </div>
-    <div class="user-name">
-      {{user.name | userName}}
+
+  <app-preloader *ngIf="loading"></app-preloader>
+
+  <div *ngIf="!loading">
+    <div *ngIf="!user">User not found</div> 
+    <div *ngIf="user">
+
+      <div class="user-intro">
+        <div class="user-picture">
+            <div class="picture-wraper">
+              <img class="activity-icon" [src]="'assets/icons/' + (user.isActive ? 'circle_green.ico' : 'circle_red.ico')" alt="No Picture">
+              <div class="round-picture-wraper">
+                <img class="round-picture" src="{{user.picture}}" alt="No Picture">
+              </div>
+            </div>
+        </div>
+        <div class="user-name">
+          {{user.name | userName}}
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="section">
+          <div class="section-title"> Personal Info </div>
+          <div class="section-data">
+            <div class="section-row row">
+              <div class="section-row-label">Email</div>
+              <div class="section-row-value">{{user.email}}</div>
+            </div>
+            <div class="section-row row">
+              <div class="section-row-label">Phone</div>
+              <div class="section-row-value">{{user.phone}}</div>
+            </div>
+            <div class="section-row row">
+              <div class="section-row-label">Address</div>
+              <div class="section-row-value">{{user.address}}</div>
+            </div>
+            <div class="section-row row">
+              <div class="section-row-label">Company</div>
+              <div class="section-row-value">{{user.company}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section ml-auto">
+          <div class="section-title"> Additional Info </div>
+          <div class="section-data">
+            <div class="section-row row">
+              <div class="section-row-label">About</div>
+              <div class="section-row-value">{{user.about}}</div>
+            </div>
+            <div class="section-row row">
+              <div class="section-row-label">Eye color</div>
+              <div class="section-row-value">{{user.eyeColor}}</div>
+            </div>
+            <div class="section-row row">
+              <div class="section-row-label">Favourite fruit</div>
+              <div class="section-row-value">{{user.favoriteFruit}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title"> Friends </div>
+          <div class="section-data">
+            <div class="section-row row" *ngFor="let friend of user.friends">
+              <div class="section-row-value">{{friend.name}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section ml-auto">
+          <div class="section-title"> Location </div>
+          <div class="section-data">
+            <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="5">
+              <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+            </agm-map>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title"> Tags </div>
+          <div class="section-data">
+            <div class="tag" *ngFor="let tag of user.tags | unique">#{{tag}}</div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
-
-  <div class="row">
-
-    <div class="section col-lg-8 col-md-10 col-sm-12 col-xs-12">
-      <div class="section-title"> Personal Info </div>
-      <div class="section-data">
-        <div class="section-row row">
-          <div class="section-row-label col-lg-4 col-md-5 col-sm-6 col-xs-12">Email</div>
-          <div class="section-row-value col-lg-8 col-md-7 col-sm-6 col-xs-12">{{user.email}}</div>
-        </div>
-        <div class="section-row row">
-          <div class="section-row-label col-lg-4 col-md-5 col-sm-6 col-xs-12">Phone</div>
-          <div class="section-row-value col-lg-8 col-md-7 col-sm-6 col-xs-12">{{user.phone}}</div>
-        </div>
-        <div class="section-row row">
-          <div class="section-row-label col-lg-4 col-md-5 col-sm-6 col-xs-12">Address</div>
-          <div class="section-row-value col-lg-8 col-md-7 col-sm-6 col-xs-12">{{user.address}}</div>
-        </div>
-        <div class="section-row row">
-          <div class="section-row-label col-lg-4 col-md-5 col-sm-6 col-xs-12">Company</div>
-          <div class="section-row-value col-lg-8 col-md-7 col-sm-6 col-xs-12">{{user.company}}</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section col-lg-8 col-md-10 col-sm-12 col-xs-12 ml-auto">
-      <div class="section-title"> Additional Info </div>
-      <div class="section-data">
-        <div class="section-row row">
-          <div class="section-row-label col-lg-4 col-md-5 col-sm-6 col-xs-12">About</div>
-          <div class="section-row-value col-lg-8 col-md-7 col-sm-6 col-xs-12">{{user.about}}</div>
-        </div>
-        <div class="section-row row">
-          <div class="section-row-label col-lg-4 col-md-5 col-sm-6 col-xs-12">Eye color</div>
-          <div class="section-row-value col-lg-8 col-md-7 col-sm-6 col-xs-12">{{user.eyeColor}}</div>
-        </div>
-        <div class="section-row row">
-          <div class="section-row-label col-lg-4 col-md-5 col-sm-6 col-xs-12">Favourite fruit</div>
-          <div class="section-row-value col-lg-8 col-md-7 col-sm-6 col-xs-12">{{user.favoriteFruit}}</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section col-lg-8 col-md-10 col-sm-12 col-xs-12 ">
-      <div class="section-title"> Friends </div>
-      <div class="section-data">
-        <div class="section-row row" *ngFor="let friend of user.friends">
-          <div class="section-row-value col-lg-8 col-md-7 col-sm-6 col-xs-12">{{friend.name}}</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section col-lg-8 col-md-10 col-sm-12 col-xs-12 ml-auto">
-      <div class="section-title"> Localisation </div>
-      <div class="section-data">
-        <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="2">
-          <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-        </agm-map>
-      </div>
-    </div>
-
-    <div class="section col-lg-8 col-md-10 col-sm-12 col-xs-12 ml-auto">
-      <div class="section-title"> Tags </div>
-      <div class="section-data">
-        <div class="tag" *ngFor="let tag of user.tags">#{{tag}}</div>
-      </div>
-    </div>
-
-  </div>
-
 </div>

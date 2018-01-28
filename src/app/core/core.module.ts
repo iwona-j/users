@@ -2,22 +2,34 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserNamePipe } from './pipes/user-name.pipe';
 import { ApiService } from './api.service';
-import { SearchByNamePipe } from './pipes/search-by-name.pipe';
+import { SearchPipe } from './pipes/search.pipe';
+import { UniquePipe } from './pipes/unique.pipe';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
+import { PreloaderComponent } from './preloader/preloader.component';
 
 @NgModule({
   imports: [
     CommonModule,
   ],
   declarations: [
+    HeaderComponent,
+    FooterComponent,
     UserNamePipe,
-    SearchByNamePipe,
+    SearchPipe,
+    UniquePipe,
+    PreloaderComponent,
   ],
   providers: [
     ApiService,
   ],
   exports: [
+    HeaderComponent,
+    FooterComponent,
+    PreloaderComponent,
     UserNamePipe,
-    SearchByNamePipe
+    SearchPipe,
+    UniquePipe
   ]
 })
-export class CoreModule { }
+export class CoreModule {}
